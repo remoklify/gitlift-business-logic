@@ -1,0 +1,1216 @@
+{
+	"info": {
+		"_postman_id": "574fa986-2152-4be8-9f7a-549c4ca04376",
+		"name": "business-logic-server-regression",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Me",
+					"item": [
+						{
+							"name": "Create Me Success [201]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+											"const encrypted = JSON.parse(pm.response.text());\r",
+											"const decrypted = CryptoJS.RC4.decrypt(\r",
+											"      encrypted,\r",
+											"      responseEncryptionSecret\r",
+											"    ).toString(CryptoJS.enc.Utf8);\r",
+											"\r",
+											"console.log({decrypted});\r",
+											"\r",
+											"pm.test(\"Response code is CREATED\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains Username\", function () {\r",
+											"    pm.expect(decrypted).to.include('username');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains Payload Item\", function () {\r",
+											"    pm.expect(decrypted).to.include('payload-item');\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{public-auth-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"payload\": {\r\n     \"payload-item\": \"{{payload-item}}\"\r\n }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{uri}}/user/me",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"user",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Me Success [200]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+											"const encrypted = JSON.parse(pm.response.text());\r",
+											"const decrypted = CryptoJS.RC4.decrypt(\r",
+											"      encrypted,\r",
+											"      responseEncryptionSecret\r",
+											"    ).toString(CryptoJS.enc.Utf8);\r",
+											"\r",
+											"console.log({decrypted});\r",
+											"\r",
+											"pm.test(\"Response code is OK\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains Username\", function () {\r",
+											"    pm.expect(decrypted).to.include('username');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains Payload Item\", function () {\r",
+											"    pm.expect(decrypted).to.include('payload-item');\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{public-auth-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"payload\": {\r\n     \"payload-item\": \"{{payload-item}}_updated\"\r\n }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{uri}}/user/me",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"user",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Me Success [200]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+											"const encrypted = JSON.parse(pm.response.text());\r",
+											"const decrypted = CryptoJS.RC4.decrypt(\r",
+											"      encrypted,\r",
+											"      responseEncryptionSecret\r",
+											"    ).toString(CryptoJS.enc.Utf8);\r",
+											"\r",
+											"console.log({decrypted});\r",
+											"\r",
+											"pm.test(\"Response code is OK\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains Username\", function () {\r",
+											"    pm.expect(decrypted).to.include('username');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains Payload Item\", function () {\r",
+											"    pm.expect(decrypted).to.include('payload-item');\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{public-auth-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{uri}}/user/me",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"user",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Me Success [200]",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+											"const encrypted = JSON.parse(pm.response.text());\r",
+											"const decrypted = CryptoJS.RC4.decrypt(\r",
+											"      encrypted,\r",
+											"      responseEncryptionSecret\r",
+											"    ).toString(CryptoJS.enc.Utf8);\r",
+											"\r",
+											"console.log({decrypted});\r",
+											"\r",
+											"pm.test(\"Response code is OK\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains Username\", function () {\r",
+											"    pm.expect(decrypted).to.include('username');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains Payload Item\", function () {\r",
+											"    pm.expect(decrypted).to.include('payload-item');\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{public-auth-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{uri}}/user/me",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"user",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create User Success [201]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is CREATED\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Username\", function () {\r",
+									"    pm.expect(decrypted).to.include('username');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Payload Item\", function () {\r",
+									"    pm.expect(decrypted).to.include('payload-item');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"current-index\", Number(pm.environment.get(\"current-index\")) + 1);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{public-auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"username\": \"{{username}}{{current-index}}\",\r\n \"payload\": {\r\n     \"payload-item\": \"{{payload-item}}\"\r\n }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri}}/user",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Success [200]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Username\", function () {\r",
+									"    pm.expect(decrypted).to.include('username');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Payload Item\", function () {\r",
+									"    pm.expect(decrypted).to.include('payload-item');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{public-auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"username\": \"{{username}}{{current-index}}\",\r\n \"payload\": {\r\n     \"payload-item\": \"{{payload-item}}_updated\"\r\n }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri}}/user",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Success [200]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Username\", function () {\r",
+									"    pm.expect(decrypted).to.include('username');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Payload Item\", function () {\r",
+									"    pm.expect(decrypted).to.include('payload-item');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{public-auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri}}/user?username={{username}}{{current-index}}",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{username}}{{current-index}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Public User Success [200]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Username\", function () {\r",
+									"    pm.expect(decrypted).to.include('username');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Payload Item\", function () {\r",
+									"    pm.expect(decrypted).to.include('payload-item');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri}}/user/public?username={{username}}{{current-index}}",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"user",
+								"public"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{username}}{{current-index}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search User Success [200]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Username\", function () {\r",
+									"    pm.expect(decrypted).to.include('username');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri}}/user/search?q={{username}}&limit=10",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"user",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "{{username}}"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users Success [200]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Username\", function () {\r",
+									"    pm.expect(decrypted).to.include('username');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Payload Item\", function () {\r",
+									"    pm.expect(decrypted).to.include('payload-item');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin-auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri}}/user/all",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Success [200]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Username\", function () {\r",
+									"    pm.expect(decrypted).to.include('username');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Payload Item\", function () {\r",
+									"    pm.expect(decrypted).to.include('payload-item');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{public-auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri}}/user?username={{username}}{{current-index}}",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{username}}{{current-index}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create Product Success [201]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is CREATED\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Product Id\", function () {\r",
+									"    pm.expect(decrypted).to.include('product_id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Product Name\", function () {\r",
+									"    pm.expect(decrypted).to.include('name');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Product Description\", function () {\r",
+									"    pm.expect(decrypted).to.include('description');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Payload Item\", function () {\r",
+									"    pm.expect(decrypted).to.include('payload-item');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"current-product-index\", Number(pm.environment.get(\"current-product-index\")) + 1);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin-auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"product_id\": \"{{product-name}}{{current-product-index}}\",\r\n \"name\": \"{{product-name}}\",\r\n \"description\": \"{{product-description}}\",\r\n \"payload\": {\r\n     \"payload-item\": \"{{payload-item}}\"\r\n }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri}}/product/admin",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"product",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products Success [200]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Product Id\", function () {\r",
+									"    pm.expect(decrypted).to.include('product_id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Product Name\", function () {\r",
+									"    pm.expect(decrypted).to.include('name');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Product Description\", function () {\r",
+									"    pm.expect(decrypted).to.include('description');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Payload Item\", function () {\r",
+									"    pm.expect(decrypted).to.include('payload-item');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{public-auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri}}/product/all",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"product",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Success [200]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Product Id\", function () {\r",
+									"    pm.expect(decrypted).to.include('product_id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Product Name\", function () {\r",
+									"    pm.expect(decrypted).to.include('name');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Product Description\", function () {\r",
+									"    pm.expect(decrypted).to.include('description');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Payload Item\", function () {\r",
+									"    pm.expect(decrypted).to.include('payload-item');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{public-auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri}}/product?product_id={{product-name}}{{current-product-index}}",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "product_id",
+									"value": "{{product-name}}{{current-product-index}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product Success [200]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseEncryptionSecret = pm.environment.get(\"response-encryption-secret\");\r",
+									"const encrypted = JSON.parse(pm.response.text());\r",
+									"const decrypted = CryptoJS.RC4.decrypt(\r",
+									"      encrypted,\r",
+									"      responseEncryptionSecret\r",
+									"    ).toString(CryptoJS.enc.Utf8);\r",
+									"\r",
+									"console.log({decrypted});\r",
+									"\r",
+									"pm.test(\"Response code is OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Product Id\", function () {\r",
+									"    pm.expect(decrypted).to.include('product_id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains Payload Item\", function () {\r",
+									"    pm.expect(decrypted).to.include('payload-item');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin-auth-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{uri}}/product/admin?product_id={{product-name}}{{current-product-index}}",
+							"host": [
+								"{{uri}}"
+							],
+							"path": [
+								"product",
+								"admin"
+							],
+							"query": [
+								{
+									"key": "product_id",
+									"value": "{{product-name}}{{current-product-index}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
