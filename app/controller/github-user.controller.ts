@@ -3,6 +3,7 @@
  */
 
 import axios from 'axios';
+import { GithubUser } from '../interface/github-user.interface';
 import { GITHUB_USER_DETAILS } from '../query/github.query';
 
 export class GithubUserController {
@@ -19,6 +20,17 @@ export class GithubUserController {
       }
     );
 
-    return response.data;
+    var githubUser: GithubUser = {} as GithubUser;
+
+    if (
+      response &&
+      response.data &&
+      response.data.data &&
+      response.data.data.user
+    ) {
+      githubUser = response.data.data.user as GithubUser;
+    }
+
+    return githubUser;
   };
 }
