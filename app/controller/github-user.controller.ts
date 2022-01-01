@@ -2,35 +2,14 @@
  * @description holds user controller
  */
 
-import {
-  GQLContributionsCollection,
-  GQLContributionsCollectionTypeResolver,
-  GQLQuery,
-  GQLUser,
-} from '../graphql/schema/schema.generated';
 import axios from 'axios';
+import { GITHUB_USER_DETAILS } from '../query/github.query';
 
 export class GithubUserController {
-  private authorization: any;
-  private url: string;
+  constructor(private authorization: string, private url: string) {}
 
-  constructor() {
-    this.authorization = '';
-    this.url = '';
-  }
-
-  getTotalContributions = async (username: string) => {
-    const query = {} as GQLQuery;
-
-    query.user = { login: username } as GQLUser;
-
-    var resolver = {
-      totalCommitContributions: {},
-    } as GQLContributionsCollectionTypeResolver;
-
-    console.log(query);
-
-    // build query with resolver
+  getUserDetails = async (username: string) => {
+    const query = GITHUB_USER_DETAILS.replace('{{username}}', username);
 
     const response = await axios.post<any>(
       this.url,
@@ -40,7 +19,6 @@ export class GithubUserController {
       }
     );
 
-    console.log(response.data);
     return response.data;
   };
 }

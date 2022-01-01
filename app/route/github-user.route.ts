@@ -21,13 +21,12 @@ export const adminRoutes = [subRoutes.all];
 
 export const router = Router();
 
-const userController = new GithubUserController();
-
-// User detail
 router.get(subRoutes.public, async (req: Request, res: Response) => {
-  // Get a single User detail
-  let user = await userController.getTotalContributions(
-    req.query.username as string
+  // Get user details
+  const userController = new GithubUserController(
+    <string>process.env.GITHUB_API_AUTH_TOKEN,
+    <string>process.env.GITHUB_API_URL
   );
+  let user = await userController.getUserDetails(req.query.username as string);
   res.status(ResponseCode.OK).json(user);
 });
