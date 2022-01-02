@@ -28,7 +28,19 @@ export class GithubUserController {
       response.data.data &&
       response.data.data.user
     ) {
-      githubUser = response.data.data.user as GithubUser;
+      const u = response.data.data.user;
+      githubUser = {
+        name: u.name,
+        avatar: u.avatarUrl,
+        bio: u.bio,
+        company: u.company,
+        email: u.email,
+        isDeveloperProgramMember: u.isDeveloperProgramMember,
+        isGithubStar: u.isGitHubStar,
+        isHireable: u.isHireable,
+        totalContributionsCount:
+          u.contributionsCollection.contributionCalendar.totalContributions,
+      } as GithubUser;
     }
 
     return githubUser;

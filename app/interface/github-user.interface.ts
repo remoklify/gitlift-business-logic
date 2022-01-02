@@ -12,6 +12,7 @@ export interface GithubUser {
   isGithubStar: boolean;
   isHireable: boolean;
   totalContributionsCount: number;
+  lastWeekEvent: any;
   languages: string[];
   primaryLanguages: string[];
 }
