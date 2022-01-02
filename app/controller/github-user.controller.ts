@@ -94,8 +94,6 @@ export class GithubUserController {
       return 0;
     });
 
-    console.log(languagesList);
-
     const length = languagesList.length > 2 ? 3 : languagesList.length;
 
     for (let i = 0; i < length; i++) {
