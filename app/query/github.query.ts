@@ -9,6 +9,15 @@ export const GITHUB_USER_DETAILS = `query
       isDeveloperProgramMember
       isGitHubStar
       isHireable
+      repositories(first: 100) {
+        nodes {
+          languages(first: 100) {
+            nodes {
+              name
+            }
+          }
+        }
+      }
       repositoriesContributedTo(first: 100, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
         totalCount
         nodes {
