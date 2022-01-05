@@ -1,11 +1,14 @@
 export const GITHUB_USER_DETAILS = `query
 {
     user(login: "{{username}}") {
+      login
       name
       avatarUrl
       bio
       company
+      location
       email
+      websiteUrl
       isDeveloperProgramMember
       isGitHubStar
       isHireable

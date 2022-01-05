@@ -34,11 +34,14 @@ export class GithubUserController {
         u.repositories.nodes
       );
       githubUser = {
+        login: u.login,
         name: u.name,
-        avatar: u.avatarUrl,
+        avatarUrl: u.avatarUrl,
         bio: u.bio,
         company: u.company,
+        location: u.location,
         email: u.email,
+        websiteUrl: u.websiteUrl,
         isDeveloperProgramMember: u.isDeveloperProgramMember,
         isGithubStar: u.isGitHubStar,
         isHireable: u.isHireable,
