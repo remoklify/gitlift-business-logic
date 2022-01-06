@@ -3,7 +3,11 @@
  */
 
 import axios from 'axios';
+import { Achievement } from '../interface/achievement.interface';
+import { Contribution } from '../interface/contribution.interface';
+import { CoreInformation } from '../interface/core-information.interface';
 import { GithubUser } from '../interface/github-user.interface';
+import { PersonalInformation } from '../interface/personal-information.interface';
 import { GITHUB_USER_DETAILS } from '../query/github.query';
 
 export class GithubUserController {
@@ -33,24 +37,40 @@ export class GithubUserController {
         u.repositoriesContributedTo?.nodes,
         u.repositories.nodes
       );
-      githubUser = {
+      const coreInformation = {
         login: u.login,
         name: u.name,
         avatarUrl: u.avatarUrl,
         bio: u.bio,
+      } as CoreInformation;
+
+      const personalInformation = {
         company: u.company,
         location: u.location,
         email: u.email,
         websiteUrl: u.websiteUrl,
+      } as PersonalInformation;
+
+      const achievement = {
         isDeveloperProgramMember: u.isDeveloperProgramMember,
         isGithubStar: u.isGitHubStar,
         isHireable: u.isHireable,
+      } as Achievement;
+
+      const contribution = {
         totalContributionsCount:
           u.contributionsCollection.contributionCalendar.totalContributions,
         lastWeekEvents:
           u.contributionsCollection.contributionCalendar.weeks.pop(),
         languages: languages.languages,
         primaryLanguages: languages.primaryLanguages,
+      } as Contribution;
+
+      githubUser = {
+        coreInformation,
+        personalInformation,
+        achievement,
+        contribution,
       } as GithubUser;
     }
 
