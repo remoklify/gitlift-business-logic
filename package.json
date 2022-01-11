@@ -6,8 +6,7 @@
   "main": "business-logic-server.main.ts",
   "scripts": {
     "start": "ts-node business-logic-server.main.ts",
-    "startLocal": "nodemon --exec DEBUG=* ts-node business-logic-server.main.ts",
-    "outdated": "node dependency-checker.ts > docs/OUTDATED.md"
+    "startLocal": "nodemon --exec DEBUG=* ts-node business-logic-server.main.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.5.6",
