@@ -69,10 +69,6 @@ GITHUB_API_URL=https://api.github.com/graphql
 RESPONSE_ENCRYPTION_SECRET={Response Encryption Secret}
 ```
 
-## Http Requests
-
-You can find list of available http request in the [requests](assets/requests) directory. You can run http requests directly via **WebStorm**, for more information check out: [jetbrains.com/help/idea/http-client-in-product-code-editor.html](https://jetbrains.com/help/idea/http-client-in-product-code-editor.html)
-
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -87,18 +83,6 @@ You can find list of available http request in the [requests](assets/requests) d
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-## Contributing
-
-Refer to **[CONTRIBUTING.md](https://github.com/open-template-hub/.github/blob/master/docs/CONTRIBUTING.md)** to see how to contribute to Open Template Hub.
-
-<br/>
-
-## Code of Conduct
-
-Refer to **[CODE_OF_CONDUCT.md](https://github.com/open-template-hub/.github/blob/master/docs/CODE_OF_CONDUCT.md)** to see contributor covenant code of conduct.
-
-<br/>
 
 ## LICENSE
 
