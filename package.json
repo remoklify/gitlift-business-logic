@@ -1,13 +1,12 @@
 {
-  "name": "business-logic-server-template",
-  "description": "Business Logic Server Template is a generic open-source server that encodes the real-world business rules that determine how data can be created, stored, and changed. It saves you from rewriting boilerplate code. It works best with other Open Template Hub products.",
+  "name": "gitlift-business-logic",
+  "description": "Gitlift Business Logic Server.",
   "version": "3.0.2",
   "license": "MIT",
   "main": "business-logic-server.main.ts",
   "scripts": {
     "start": "ts-node business-logic-server.main.ts",
     "startLocal": "nodemon --exec DEBUG=* ts-node business-logic-server.main.ts",
-    "postmanDevelop": "newman run ./assets/tests/regression-tests/postman/business-logic-server-regression.postman_collection.json -e ./assets/tests/regression-tests/postman/business-logic-server-regression.postman_environment.json -r htmlextra --reporter-htmlextra-export ./assets/test-results/postman.html --reporter-htmlextra-darkTheme  > ./assets/test-results/postman-dark.html",
     "outdated": "node dependency-checker.ts > docs/OUTDATED.md"
   },
   "dependencies": {
@@ -30,10 +29,10 @@
   "devDependencies": {
     "nodemon": "^2.0.15"
   },
-  "git repository": "https://github.com/open-template-hub/business-logic-server-template",
+  "git repository": "https://github.com/remoklify/gitlift-business-logic",
   "repository": {
     "type": "git",
-    "url": "https://github.com/open-template-hub/business-logic-server-template.git"
+    "url": "https://github.com/remoklify/gitlift-business-logic.git"
   },
   "keywords": [
     "info",
@@ -49,6 +48,11 @@
     "typescript",
     "template",
     "server template",
-    "open template hub"
+    "open template hub",
+    "remoklify",
+    "gitlift",
+    "git",
+    "github",
+    "github profile"
   ]
 }

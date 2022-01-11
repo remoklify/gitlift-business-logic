@@ -1,21 +1,28 @@
 <p align="center">
-   <a href="https://opentemplatehub.com">
-    <img src="https://raw.githubusercontent.com/open-template-hub/open-template-hub.github.io/master/assets/logo/server/business-logic-server-logo.png" alt="Logo" width=200>
+   <a href="https://remoklify.com">
+    <img src="https://raw.githubusercontent.com/remoklify/remoklify.github.io/master/assets/logo/developed-by.png" alt="Logo" width=100>
   </a>
 </p>
 
+<p align="center">
+   <a href="https://remoklify.com">
+    <img src="https://raw.githubusercontent.com/open-template-hub/open-template-hub.github.io/master/assets/min/badge/powered-by-dark-mode.min.png" alt="Logo" width=100>
+  </a>
+</p>
+
+
 <h1 align="center">
-Open Template Hub - Business Logic Server Template v3
+Remoklify - Gitlift Business Logic Server v1
 </h1>
 
-[![License](https://img.shields.io/github/license/open-template-hub/business-logic-server-template?color=43b043&style=for-the-badge)](LICENSE)
-[![Issues](https://img.shields.io/github/issues/open-template-hub/business-logic-server-template?color=43b043&style=for-the-badge)](https://github.com/open-template-hub/business-logic-server-template/issues)
-[![PRCLosed](https://img.shields.io/github/issues-pr-closed-raw/open-template-hub/business-logic-server-template?color=43b043&style=for-the-badge)](https://github.com/open-template-hub/business-logic-server-template/pulls?q=is%3Apr+is%3Aclosed)
-[![LastCommit](https://img.shields.io/github/last-commit/open-template-hub/business-logic-server-template?color=43b043&style=for-the-badge)](https://github.com/open-template-hub/business-logic-server-template/commits/master)
-[![Release](https://img.shields.io/github/release/open-template-hub/business-logic-server-template?include_prereleases&color=43b043&style=for-the-badge)](https://github.com/open-template-hub/business-logic-server-template/releases)
+[![License](https://img.shields.io/github/license/remoklify/gitlift-business-logic?color=43b043&style=for-the-badge)](LICENSE)
+[![Issues](https://img.shields.io/github/issues/remoklify/gitlift-business-logic?color=43b043&style=for-the-badge)](https://github.com/remoklify/gitlift-business-logic/issues)
+[![PRCLosed](https://img.shields.io/github/issues-pr-closed-raw/remoklify/gitlift-business-logic?color=43b043&style=for-the-badge)](https://github.com/remoklify/gitlift-business-logic/pulls?q=is%3Apr+is%3Aclosed)
+[![LastCommit](https://img.shields.io/github/last-commit/remoklify/gitlift-business-logic?color=43b043&style=for-the-badge)](https://github.com/remoklify/gitlift-business-logic/commits/master)
+[![Release](https://img.shields.io/github/release/remoklify/gitlift-business-logic?include_prereleases&color=43b043&style=for-the-badge)](https://github.com/remoklify/gitlift-business-logic/releases)
 [![SonarCloud](https://img.shields.io/sonar/quality_gate/open-template-hub_business-logic-server-template?server=https%3A%2F%2Fsonarcloud.io&label=Sonar%20Cloud&style=for-the-badge&logo=sonarcloud)](https://sonarcloud.io/dashboard?id=open-template-hub_business-logic-server-template)
 
-Business Logic Server Template is a generic open-source server that encodes the real-world business rules that determine how data can be created, stored, and changed. It saves you from rewriting boilerplate code. It works best with other Open Template Hub products.
+Gitlift Business Logic Server.
 
 ## Ways to Begin
 
@@ -23,7 +30,7 @@ Business Logic Server Template is a generic open-source server that encodes the 
 
 Deploy this template to Heroku
 
-[![Deploy](https://img.shields.io/badge/Deploy_to-Heroku-7056bf.svg?style=for-the-badge&logo=heroku)](https://heroku.com/deploy?template=https://github.com/open-template-hub/business-logic-server-template)
+[![Deploy](https://img.shields.io/badge/Deploy_to-Heroku-7056bf.svg?style=for-the-badge&logo=heroku)](https://heroku.com/deploy?template=https://github.com/remoklify/gitlift-business-logic)
 
 ### 2. Start with Server Generator
 
@@ -35,7 +42,7 @@ Create your server with Server Generator Package
 
 Use this repository as a Template
 
-[![GitHubTemplate](https://img.shields.io/badge/GitHub-Template-24292e.svg?style=for-the-badge&logo=github)](https://github.com/open-template-hub/business-logic-server-template/generate)
+[![GitHubTemplate](https://img.shields.io/badge/GitHub-Template-24292e.svg?style=for-the-badge&logo=github)](https://github.com/remoklify/gitlift-business-logic/generate)
 
 ## Installations
 
@@ -57,20 +64,13 @@ If you don't give **RESPONSE_ENCRYPTION_SECRET**, response encryption mechanism 
 ``` applescript
 PORT=4002
 
-PROJECT=OTH
+PROJECT=GITLIFT
 MODULE=BusinessLogicServer
 ENVIRONMENT=Local
 
-MONGODB_URI={Database Connection Url}
-MONGODB_CONNECTION_LIMIT={MongoDB Connection Limit}
+GITHUB_API_AUTH_TOKEN=Bearer ghp_xxxxxxx
+GITHUB_API_URL=https://api.github.com/graphql
 
-CLOUDAMQP_APIKEY={MQ Api Key}
-CLOUDAMQP_URL={MQ Connection Url}
-
-BUSINESS_LOGIC_SERVER_QUEUE_CHANNEL=oth_business_logic_queue
-ORCHESTRATION_SERVER_QUEUE_CHANNEL=oth_orchestration_queue
-
-ACCESS_TOKEN_SECRET={Access Token Secret}
 RESPONSE_ENCRYPTION_SECRET={Response Encryption Secret}
 ```
 
@@ -85,9 +85,7 @@ You can find list of available http request in the [requests](assets/requests) d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/furknyavuz"><img src="https://avatars0.githubusercontent.com/u/2248168?s=460&u=435ef6ade0785a7a135ce56cae751fb3ade1d126&v=4" width="100px;" alt=""/><br /><sub><b>Furkan Yavuz</b></sub></a><br /><a href="https://github.com/open-template-hub/business-logic-server-template/issues/created_by/furknyavuz" title="Answering Questions">💬</a> <a href="https://github.com/open-template-hub/business-logic-server-template/commits?author=furknyavuz" title="Documentation">📖</a> <a href="https://github.com/open-template-hub/business-logic-server-template/pulls?q=is%3Apr+reviewed-by%3Afurknyavuz" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://github.com/fatihturker"><img src="https://avatars1.githubusercontent.com/u/2202179?s=460&u=261b1129e7106c067783cb022ab9999aad833bdc&v=4" width="100px;" alt=""/><br /><sub><b>Fatih Turker</b></sub></a><br /><a href="https://github.com/open-template-hub/business-logic-server-template/issues/created_by/fatihturker" title="Answering Questions">💬</a> <a href="https://github.com/open-template-hub/business-logic-server-template/commits?author=fatihturker" title="Documentation">📖</a> <a href="https://github.com/open-template-hub/business-logic-server-template/pulls?q=is%3Apr+reviewed-by%3Afatihturker" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://github.com/mertlsarac"><img src="https://avatars1.githubusercontent.com/u/38442589?s=400&u=aa3cda11724fc297a0bfa6beb35c9be81687cf3c&v=4" width="100px;" alt=""/><br /><sub><b>Mert Sarac</b></sub></a><br /><a href="https://github.com/open-template-hub/business-logic-server-template/issues/created_by/mertlsarac" title="Answering Questions">💬</a> <a href="https://github.com/open-template-hub/business-logic-server-template/commits?author=mertlsarac" title="Documentation">📖</a> <a href="https://github.com/open-template-hub/business-logic-server-template/pulls?q=is%3Apr+reviewed-by%3Amertlsarac" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/fatihturker"><img src="https://avatars1.githubusercontent.com/u/2202179?s=460&u=261b1129e7106c067783cb022ab9999aad833bdc&v=4" width="100px;" alt=""/><br /><sub><b>Fatih Turker</b></sub></a><br /><a href="https://github.com/remoklify/gitlift-business-logic/issues/created_by/fatihturker" title="Answering Questions">💬</a> <a href="https://github.com/remoklify/gitlift-business-logic/commits?author=fatihturker" title="Documentation">📖</a> <a href="https://github.com/remoklify/gitlift-business-logic/pulls?q=is%3Apr+reviewed-by%3Afatihturker" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 
