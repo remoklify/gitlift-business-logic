@@ -22,7 +22,7 @@ Remoklify - Gitlift Business Logic Server v1
 [![Release](https://img.shields.io/github/release/remoklify/gitlift-business-logic?include_prereleases&color=43b043&style=for-the-badge)](https://github.com/remoklify/gitlift-business-logic/releases)
 [![SonarCloud](https://img.shields.io/sonar/quality_gate/open-template-hub_business-logic-server-template?server=https%3A%2F%2Fsonarcloud.io&label=Sonar%20Cloud&style=for-the-badge&logo=sonarcloud)](https://sonarcloud.io/dashboard?id=open-template-hub_business-logic-server-template)
 
-Gitlift Business Logic Server.
+Gitlift Business Logic Server consumes Github API v4 (Graphql) and implements business logic for Gitlift UI.
 
 ## Ways to Begin
 
