@@ -6,7 +6,7 @@
 
 <p align="center">
    <a href="https://remoklify.com">
-    <img src="https://raw.githubusercontent.com/open-template-hub/open-template-hub.github.io/master/assets/min/badge/powered-by-dark-mode.min.png" alt="Logo" width=160>
+    <img src="https://raw.githubusercontent.com/open-template-hub/open-template-hub.github.io/master/assets/min/badge/powered-by-light-mode.min.png" alt="Logo" width=140>
   </a>
 </p>
 
