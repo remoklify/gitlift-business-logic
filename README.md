@@ -32,13 +32,8 @@ Deploy this template to Heroku
 
 [![Deploy](https://img.shields.io/badge/Deploy_to-Heroku-7056bf.svg?style=for-the-badge&logo=heroku)](https://heroku.com/deploy?template=https://github.com/remoklify/gitlift-business-logic)
 
-### 2. Start with Server Generator
 
-Create your server with Server Generator Package
-
-[![NPM](https://img.shields.io/badge/NPM-server_generator-cb3837.svg?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@open-template-hub/server-generator)
-
-### 3. GitHub Template
+### 2. GitHub Template
 
 Use this repository as a Template
 
