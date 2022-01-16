@@ -45,6 +45,14 @@ export const GITHUB_USER_DETAILS = `query
         }
       }
       contributionsCollection {
+        commitContributionsByRepository {
+            contributions{
+               totalCount
+            }
+            repository {
+                nameWithOwner
+            }
+        }
         totalCommitContributions
         totalIssueContributions
         totalPullRequestContributions
