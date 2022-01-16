@@ -12,8 +12,14 @@ export const GITHUB_USER_DETAILS = `query
       isDeveloperProgramMember
       isGitHubStar
       isHireable
+      followers {
+          totalCount
+      }
       repositories(first: 100) {
         nodes {
+          forkCount
+          stargazerCount
+          nameWithOwner
           languages(first: 100) {
             nodes {
               name
@@ -24,6 +30,8 @@ export const GITHUB_USER_DETAILS = `query
       repositoriesContributedTo(first: 100, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
         totalCount
         nodes {
+          forkCount
+          stargazerCount
           nameWithOwner
           languages(first: 100) {
             nodes {
@@ -37,6 +45,10 @@ export const GITHUB_USER_DETAILS = `query
         }
       }
       contributionsCollection {
+        totalCommitContributions
+        totalIssueContributions
+        totalPullRequestContributions
+        totalPullRequestReviewContributions
         contributionCalendar {
           totalContributions
           weeks {

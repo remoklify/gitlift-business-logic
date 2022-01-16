@@ -37,6 +37,12 @@ export class GithubUserController {
         u.repositoriesContributedTo?.nodes,
         u.repositories.nodes
       );
+
+      const interactions = this.getInteractions(
+        u.repositoriesContributedTo?.nodes,
+        u.repositories.nodes
+      );
+
       const coreInformation = {
         login: u.login,
         name: u.name,
@@ -58,6 +64,17 @@ export class GithubUserController {
       } as Achievement;
 
       const contribution = {
+        totalForkCount: interactions.totalForkCount,
+        totalStargazerCount: interactions.totalStargazerCount,
+        totalFollowersCount: u.followers.totalCount,
+        totalCommitContributions:
+          u.contributionsCollection.totalCommitContributions,
+        totalIssueContributions:
+          u.contributionsCollection.totalIssueContributions,
+        totalPullRequestContributions:
+          u.contributionsCollection.totalPullRequestContributions,
+        totalPullRequestReviewContributions:
+          u.contributionsCollection.totalPullRequestReviewContributions,
         totalContributionsCount:
           u.contributionsCollection.contributionCalendar.totalContributions,
         lastWeekEvents:
@@ -75,6 +92,31 @@ export class GithubUserController {
     }
 
     return githubUser;
+  };
+
+  getInteractions = (repositoriesContributedTo: any[], repositories: any[]) => {
+    var allRepositories: any[] = [];
+    var repoNames: string[] = [];
+    var totalStargazerCount: number = 0;
+    var totalForkCount: number = 0;
+
+    allRepositories = [...repositoriesContributedTo, ...repositories];
+
+    for (let i = 0; i < allRepositories.length; i++) {
+      const repo = allRepositories[i];
+      if (repo && repo.nameWithOwner) {
+        if (repoNames.indexOf(repo.nameWithOwner) === -1) {
+          repoNames.push(repo.nameWithOwner);
+          totalStargazerCount += repo.stargazerCount;
+          totalForkCount += repo.forkCount;
+        }
+      }
+    }
+
+    return {
+      totalStargazerCount,
+      totalForkCount,
+    };
   };
 
   getLanguagesAndPrimaryLanguages = (
