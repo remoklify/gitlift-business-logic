@@ -3,6 +3,7 @@ export interface Contribution {
   totalIssueContributions: number;
   totalPullRequestContributions: number;
   totalPullRequestReviewContributions: number;
+  totalRepositoryContributions: number;
   totalContributionsCount: number;
   totalStargazerCount: number;
   totalForkCount: number;

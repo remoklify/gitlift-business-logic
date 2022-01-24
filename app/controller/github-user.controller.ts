@@ -75,6 +75,8 @@ export class GithubUserController {
           u.contributionsCollection.totalPullRequestContributions,
         totalPullRequestReviewContributions:
           u.contributionsCollection.totalPullRequestReviewContributions,
+        totalRepositoryContributions:
+          u.contributionsCollection.totalRepositoryContributions,
         totalContributionsCount:
           u.contributionsCollection.contributionCalendar.totalContributions,
         lastWeekEvents:

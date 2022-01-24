@@ -57,6 +57,7 @@ export const GITHUB_USER_DETAILS = `query
         totalIssueContributions
         totalPullRequestContributions
         totalPullRequestReviewContributions
+        totalRepositoryContributions
         contributionCalendar {
           totalContributions
           weeks {
