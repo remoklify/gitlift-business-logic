@@ -1,3 +1,5 @@
+import { Language } from './language.interface';
+
 export interface Contribution {
   totalCommitContributions: number;
   totalIssueContributions: number;
@@ -9,6 +11,5 @@ export interface Contribution {
   totalForkCount: number;
   totalFollowersCount: number;
   lastWeekEvents: any;
-  languages: string[];
-  primaryLanguages: string[];
+  languages: Language[];
 }

@@ -7,6 +7,7 @@ import { Achievement } from '../interface/achievement.interface';
 import { Contribution } from '../interface/contribution.interface';
 import { CoreInformation } from '../interface/core-information.interface';
 import { GithubUser } from '../interface/github-user.interface';
+import { Language } from '../interface/language.interface';
 import { PersonalInformation } from '../interface/personal-information.interface';
 import { GITHUB_USER_DETAILS } from '../query/github.query';
 
@@ -33,9 +34,10 @@ export class GithubUserController {
       response.data.data.user
     ) {
       const u = response.data.data.user;
-      const languages = this.getLanguagesAndPrimaryLanguages(
+      const languages = this.getLanguagesList(
         u.repositoriesContributedTo?.nodes,
-        u.repositories.nodes
+        u.repositories.nodes,
+        u.contributionsCollection.commitContributionsByRepository
       );
 
       const interactions = this.getInteractions(
@@ -81,8 +83,7 @@ export class GithubUserController {
           u.contributionsCollection.contributionCalendar.totalContributions,
         lastWeekEvents:
           u.contributionsCollection.contributionCalendar.weeks.pop(),
-        languages: languages.languages,
-        primaryLanguages: languages.primaryLanguages,
+        languages: languages,
       } as Contribution;
 
       githubUser = {
@@ -121,67 +122,67 @@ export class GithubUserController {
     };
   };
 
-  getLanguagesAndPrimaryLanguages = (
+  getLanguagesList = (
     repositoriesContributedTo: any[],
-    repositories: any[]
+    repositories: any[],
+    commitContributionsByRepository: any[]
   ) => {
-    var languagesList: any[] = [];
-    var primaryLanguages: string[] = [];
+    var primaryLanguages: Language[] = [];
+    var languages: Language[] = [];
     var allRepositories: any[] = [];
 
     allRepositories = [...repositoriesContributedTo, ...repositories];
 
-    languagesList = this.getLanguages(allRepositories);
+    languages = this.getLanguages(
+      allRepositories,
+      commitContributionsByRepository
+    );
 
-    languagesList = languagesList.sort((a: any, b: any) => {
-      if (a.count > b.count) {
+    console.log(languages);
+
+    languages = languages.sort((a: any, b: any) => {
+      if (a.point > b.point) {
         return -1;
       }
 
-      if (a.count < b.count) {
+      if (a.point < b.point) {
         return 1;
       }
 
       return 0;
     });
 
-    const length = languagesList.length > 2 ? 3 : languagesList.length;
-
-    for (let i = 0; i < length; i++) {
-      primaryLanguages.push(languagesList[i].name);
-    }
-
-    const languages: string[] = languagesList.map((l: any) => l.name);
-
-    return {
-      languages,
-      primaryLanguages,
-    };
+    return languages;
   };
 
-  getLanguages = (repositories: any[]) => {
-    var languagesList: any[] = [];
+  getLanguages = (
+    repositories: any[],
+    commitContributionsByRepository: any[]
+  ) => {
+    var languagesList: Language[] = [];
+    repositories = repositories.filter((r: any) => r);
+    for (let i = 0; i < commitContributionsByRepository.length; i++) {
+      const commit = commitContributionsByRepository[i];
+      const repo = repositories.find(
+        (r) => r.nameWithOwner === commit.repository.nameWithOwner
+      );
 
-    if (repositories) {
-      for (let i = 0; i < repositories.length; i++) {
-        const contributed = repositories[i];
-        if (
-          contributed &&
-          contributed.languages &&
-          contributed.languages.nodes
-        ) {
-          var contributedLangs: any[] = contributed.languages.nodes;
-          for (let k = 0; k < contributedLangs.length; k++) {
-            const contributedLang = contributedLangs[k];
-            const element = languagesList.find(
-              (c: any) => c.name === contributedLang.name
-            );
-            if (element) {
-              const index = languagesList.indexOf(element);
-              languagesList[index].count += 1;
-            } else {
-              languagesList.push({ name: contributedLang.name, count: 0 });
-            }
+      if (repo && repo.languages && repo.languages.nodes) {
+        for (let k = 0; k < repo.languages.nodes.length; k++) {
+          const language = repo.languages.nodes[k];
+          var found = languagesList.find((l) => l.name === language.name);
+
+          if (found) {
+            let index = languagesList.indexOf(found);
+            let updated = found;
+            updated.point += commit.contributions.totalCount;
+
+            languagesList[index] = updated;
+          } else {
+            languagesList.push({
+              name: language.name as string,
+              point: commit.contributions.totalCount as number,
+            } as Language);
           }
         }
       }
