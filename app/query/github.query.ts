@@ -15,7 +15,7 @@ export const GITHUB_USER_DETAILS = `query
       followers {
           totalCount
       }
-      repositories(first: 100) {
+      repositories(first: 100, isFork: false) {
         nodes {
           forkCount
           stargazerCount

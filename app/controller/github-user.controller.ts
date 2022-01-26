@@ -41,7 +41,6 @@ export class GithubUserController {
       );
 
       const interactions = this.getInteractions(
-        u.repositoriesContributedTo?.nodes,
         u.repositories.nodes
       );
 
@@ -97,16 +96,13 @@ export class GithubUserController {
     return githubUser;
   };
 
-  getInteractions = (repositoriesContributedTo: any[], repositories: any[]) => {
-    var allRepositories: any[] = [];
+  getInteractions = (repositories: any[]) => {
     var repoNames: string[] = [];
     var totalStargazerCount: number = 0;
     var totalForkCount: number = 0;
 
-    allRepositories = [...repositoriesContributedTo, ...repositories];
-
-    for (let i = 0; i < allRepositories.length; i++) {
-      const repo = allRepositories[i];
+    for (let i = 0; i < repositories.length; i++) {
+      const repo = repositories[i];
       if (repo && repo.nameWithOwner) {
         if (repoNames.indexOf(repo.nameWithOwner) === -1) {
           repoNames.push(repo.nameWithOwner);
