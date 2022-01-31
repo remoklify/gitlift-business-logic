@@ -74,10 +74,14 @@ export class GithubUserController {
         interactions.totalForkCount +
         interactions.totalStargazerCount +
         u.followers.totalCount;
+      const login = u.login;
 
       const encryptionUtil: CommonEncryptionUtil = new CommonEncryptionUtil();
 
-      const hash = encryptionUtil.encrypt({ created, totalPoint }, this.secret);
+      const hash = encryptionUtil.encrypt(
+        { created, totalPoint, login },
+        this.secret
+      );
 
       const contribution = {
         totalForkCount: interactions.totalForkCount,
