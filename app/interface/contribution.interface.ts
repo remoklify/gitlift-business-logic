@@ -12,4 +12,5 @@ export interface Contribution {
   totalFollowersCount: number;
   lastWeekEvents: any;
   languages: Language[];
+  hash: string;
 }

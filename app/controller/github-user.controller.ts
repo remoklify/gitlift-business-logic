@@ -2,6 +2,7 @@
  * @description holds user controller
  */
 
+import { EncryptionUtil } from '@open-template-hub/common';
 import axios from 'axios';
 import { Achievement } from '../interface/achievement.interface';
 import { Contribution } from '../interface/contribution.interface';
@@ -10,9 +11,14 @@ import { GithubUser } from '../interface/github-user.interface';
 import { Language } from '../interface/language.interface';
 import { PersonalInformation } from '../interface/personal-information.interface';
 import { GITHUB_USER_DETAILS } from '../query/github.query';
+import { CommonEncryptionUtil } from '../util/encryption.util';
 
 export class GithubUserController {
-  constructor(private authorization: string, private url: string) {}
+  constructor(
+    private authorization: string,
+    private url: string,
+    private secret: string
+  ) {}
 
   getUserDetails = async (username: string) => {
     const query = GITHUB_USER_DETAILS.replace('{{username}}', username);
@@ -40,9 +46,7 @@ export class GithubUserController {
         u.contributionsCollection.commitContributionsByRepository
       );
 
-      const interactions = this.getInteractions(
-        u.repositories.nodes
-      );
+      const interactions = this.getInteractions(u.repositories.nodes);
 
       const coreInformation = {
         login: u.login,
@@ -64,6 +68,17 @@ export class GithubUserController {
         isHireable: u.isHireable,
       } as Achievement;
 
+      const created = new Date();
+      const totalPoint =
+        u.contributionsCollection.contributionCalendar.totalContributions +
+        interactions.totalForkCount +
+        interactions.totalStargazerCount +
+        u.followers.totalCount;
+
+      const encryptionUtil: CommonEncryptionUtil = new CommonEncryptionUtil();
+
+      const hash = encryptionUtil.encrypt({ created, totalPoint }, this.secret);
+
       const contribution = {
         totalForkCount: interactions.totalForkCount,
         totalStargazerCount: interactions.totalStargazerCount,
@@ -83,6 +98,7 @@ export class GithubUserController {
         lastWeekEvents:
           u.contributionsCollection.contributionCalendar.weeks.pop(),
         languages: languages,
+        hash,
       } as Contribution;
 
       githubUser = {
@@ -94,6 +110,11 @@ export class GithubUserController {
     }
 
     return githubUser;
+  };
+
+  decryptHash = (hash: string) => {
+    const encryptionUtil: CommonEncryptionUtil = new CommonEncryptionUtil();
+    return encryptionUtil.decrypt(hash, this.secret);
   };
 
   getInteractions = (repositories: any[]) => {
