@@ -118,7 +118,13 @@ export class GithubUserController {
 
   decryptHash = (hash: string) => {
     const encryptionUtil: CommonEncryptionUtil = new CommonEncryptionUtil();
-    return encryptionUtil.decrypt(hash, this.secret);
+    var decrypted = {};
+    try {
+      decrypted = encryptionUtil.decrypt(hash, this.secret);
+    } catch (e) {
+      console.log('decryptHash > error: ', e);
+    }
+    return decrypted;
   };
 
   getInteractions = (repositories: any[]) => {
