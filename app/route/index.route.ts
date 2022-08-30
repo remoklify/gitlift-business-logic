@@ -45,7 +45,7 @@ export namespace Routes {
 
   export const mount = (app: any) => {
     environment = new Environment();
-    errorHandlerUtil = new ErrorHandlerUtil( debugLogUtil, environment.args() );
+    errorHandlerUtil = new ErrorHandlerUtil( debugLogUtil );
 
     publicRoutes = [
       ...populateRoutes(subRoutes.monitor, monitorPublicRoutes),
